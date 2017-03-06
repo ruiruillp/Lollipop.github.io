@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://ruiruillp.github.io/2017/03/06/crontab/index.html">
 <meta property="og:site_name" content="Lollipop's Blog">
 <meta property="og:description" content="写在前面（这段是我自言自语，用来记录工作生活的废话，可以不用看）最近实验室的项目中需要实现一个定时功能，需要将数据库中每一周的数据做一个统计，生成周报在网站上展示，并提供每周数据的下载，考虑到数据量比较大，若即时统计以及生成下载文件，会严重拖慢网页的访问速度和下载速度。因此，需要提前统计好周报数据以及提取每周数据并生成文件，由于数据每周都会更新，若每周人为地去操作这些将会是一件很繁琐的事情（毕竟我">
-<meta property="og:updated_time" content="2017-03-06T14:54:18.012Z">
+<meta property="og:updated_time" content="2017-03-06T14:56:04.149Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cron配置定时任务">
 <meta name="twitter:description" content="写在前面（这段是我自言自语，用来记录工作生活的废话，可以不用看）最近实验室的项目中需要实现一个定时功能，需要将数据库中每一周的数据做一个统计，生成周报在网站上展示，并提供每周数据的下载，考虑到数据量比较大，若即时统计以及生成下载文件，会严重拖慢网页的访问速度和下载速度。因此，需要提前统计好周报数据以及提取每周数据并生成文件，由于数据每周都会更新，若每周人为地去操作这些将会是一件很繁琐的事情（毕竟我">
@@ -203,7 +203,7 @@
       
           
         <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>（这段是我自言自语，用来记录工作生活的废话，可以不用看）<br>最近实验室的项目中需要实现一个定时功能，需要将数据库中每一周的数据做一个统计，生成周报在网站上展示，并提供每周数据的下载，考虑到数据量比较大，若即时统计以及生成下载文件，会严重拖慢网页的访问速度和下载速度。因此，需要提前统计好周报数据以及提取每周数据并生成文件，由于数据每周都会更新，若每周人为地去操作这些将会是一件很繁琐的事情（毕竟我记忆力不好），想偷懒，所以就想着找一个Linux可用的定时器，能够周期性地地运行我写好的用来统计数据和生成文件的代码，于是就让我找到了Cron。</p>
-<h2 id="Cron简介"><a href="#Cron简介" class="headerlink" title="Cron简介"></a>Cron简介</h2><p><a href="https://zh.wikipedia.org/wiki/Cron" target="_blank" rel="external">Cron-wiki</a><br><code>crontab</code>命令常见于Unix和类Unix的操作系统之中，<strong>用于设置周期性被执行的命令</strong>。该命令从标准输入设备读取指令，并将其存放于“crontab”文件中，以供之后读取和执行。该词来源于希腊语chronos（χρόνος），原意是时间。<br>通常，<code>crontab</code>储存的指令被守护进程激活，<code>crond</code>常常在后台运行，每一分钟检查是否有预定的作业需要执行。这类作业一般称为cron jobs。</p>
+<h2 id="Cron简介"><a href="#Cron简介" class="headerlink" title="Cron简介"></a>Cron简介</h2><p><a href="https://zh.wikipedia.org/wiki/Cron" target="_blank" rel="external">Cron-wiki</a><br><code>crontab</code>命令常见于Unix和类Unix的操作系统之中，<strong>用于设置周期性被执行的命令</strong>。该命令从标准输入设备读取指令，并将其存放于“crontab”文件中，以供之后读取和执行。该词来源于希腊语chronos（χρόνος），原意是时间。<br>通常，<code>crontab</code>储存的指令被守护进程激活，<code>crond</code>常常在后台运行，每一分钟检查是否有预定的作业需要执行。这类作业一般称为cron jobs。<br><a id="more"></a></p>
 <p>##　Crontab文件<br>用户所建立的crontab文件中，每一行都代表一项任务，每行的每个字段代表一项设置，它的格式共分为六个字段，前五段是时间设定段，第六段是要执行的命令段</p>
 <h3 id="语法格式"><a href="#语法格式" class="headerlink" title="语法格式"></a>语法格式</h3><pre><code>minute hour day-of-month month day-of-week command
 </code></pre><p>其中：</p>
@@ -256,7 +256,7 @@ $ service crond restart
         <p><span>本文标题:</span><a href="/2017/03/06/crontab/">Cron配置定时任务</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Lollipop 的个人博客">Lollipop</a></p>
         <p><span>发布时间:</span>2017年03月06日 - 20时05分</p>
-        <p><span>最后更新:</span>2017年03月06日 - 22时54分</p>
+        <p><span>最后更新:</span>2017年03月06日 - 22时56分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/03/06/crontab/" title="Cron配置定时任务">https://ruiruillp.github.io/2017/03/06/crontab/</a>
             <span class="copy-path" data-clipboard-text="原文: https://ruiruillp.github.io/2017/03/06/crontab/　　作者: Lollipop" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
