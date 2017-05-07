@@ -115,7 +115,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/crontab/" style="font-size: 10px;">crontab</a>
+                        <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/crontab/" style="font-size: 10px;">crontab</a> <a href="/tags/pdfminer/" style="font-size: 10px;">pdfminer</a> <a href="/tags/python/" style="font-size: 10px;">python</a>
                     </div>
                 </section>
                 
@@ -164,6 +164,116 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-PDFreader" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/05/07/PDFreader/" class="article-date">
+      <time datetime="2017-05-07T12:43:45.000Z" itemprop="datePublished">2017-05-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/07/PDFreader/">【论文翻译小助手】python2使用pdfminer读取本地pdf内容（支持中文）并去掉多余换行符</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>看paper英语不好是硬伤，比如我，每次都大段大段把pdf里的内容占到google翻译里，但是pdf直接复制出来的内容每一行会多一个换行，似的翻译出来的内容不连贯，影响翻译的质量，每次都手动删太麻烦了，就抽空写了这个小程序，来帮我自动读取本地的pdf内容，并去掉多余的换行符，保存为txt文本。</p>
+<h2 id="pdfminer"><a href="#pdfminer" class="headerlink" title="pdfminer"></a>pdfminer</h2><p>python2.4及以上（python3不支持）有一个可以从PDF文档中提取信息的库——<a href="http://www.unixuser.org/~euske/python/pdfminer/" target="_blank" rel="external">pdfminer</a>，具体的下载和安装就不赘述了，链接中有。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>原谅我最近比较忙，就不多说了，直接贴代码，关键部分有注释：</p>
+<pre><code># -*- coding: utf-8 -*-
+from pdfminer.pdfparser import PDFParser
+from pdfminer.pdfdocument import PDFDocument
+from pdfminer.pdfpage import PDFPage
+from pdfminer.pdfpage import PDFTextExtractionNotAllowed
+from pdfminer.pdfinterp import PDFResourceManager
+from pdfminer.pdfinterp import PDFPageInterpreter
+from pdfminer.layout import *
+from pdfminer.converter import PDFPageAggregator
+import re,os
+
+def Pdf2Txt(Path,file_txt,file_translated):
+    #来创建一个pdf文档分析器
+    parser = PDFParser(Path)
+    #创建一个PDF文档对象存储文档结构
+    document = PDFDocument(parser)
+    # 检查文件是否允许文本提取
+    if not document.is_extractable:
+        raise PDFTextExtractionNotAllowed
+    else:
+        # 创建一个PDF资源管理器对象来存储共赏资源
+        rsrcmgr=PDFResourceManager()
+        # 设定参数进行分析
+        laparams=LAParams()
+        # 创建一个PDF设备对象
+        # device=PDFDevice(rsrcmgr)
+        device=PDFPageAggregator(rsrcmgr,laparams=laparams)
+        # 创建一个PDF解释器对象
+        interpreter=PDFPageInterpreter(rsrcmgr,device)
+        # 处理每一页
+        for page in PDFPage.create_pages(document):
+            interpreter.process_page(page)
+            # 接受该页面的LTPage对象
+            layout=device.get_result()
+            for x in layout:
+                if(isinstance(x,LTTextBoxHorizontal)):
+                    with open(&apos;%s&apos;%(file_txt),&apos;a&apos;) as f:
+                        # 除去多余换行（选用了不常用的字符&apos;~&apos;过渡）
+                        re_result, number = re.subn(&apos;(\n\s)+&apos;, &apos;~&apos;,  x.get_text().encode(&apos;utf-8&apos;))
+                        result = re_result.replace(&apos;\n&apos;,&apos;&apos;).replace(&apos;~&apos;,&apos;\n&apos;) + &apos;\n&apos;
+                        f.write(result)
+
+fileIn = unicode(&apos;{paper_name}.pdf&apos;,&quot;utf-8&quot;)
+Path = open(fileIn, &apos;rb&apos;)
+file_txt = fileIn.replace(&apos;.pdf&apos;,&apos;.txt&apos;)
+file_translated = fileIn.replace(&apos;.pdf&apos;,&apos;_translated.txt&apos;)
+if os.path.exists(file_txt):
+    os.remove(file_txt)
+Pdf2Txt(Path,file_txt,file_translated)
+</code></pre><p>翻译的话，本来想直接在程序中调用google翻译的，正常途径需要收费，查了很多资料，除了翻墙问题，google翻译更新后ticket机制已经不允许简单的爬虫访问了，感兴趣的话可以换成百度翻译，或者可以直接将生成的txt中的内容粘贴到google翻译中，也不算太麻烦。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pdfminer/">pdfminer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-crontab" class="article article-type-post" itemscope itemprop="blogPost">
   

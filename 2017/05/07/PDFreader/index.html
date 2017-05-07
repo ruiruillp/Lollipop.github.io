@@ -3,18 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Cron配置定时任务 | Lollipop&#39;s Blog</title>
+  <title>【论文翻译小助手】python2使用pdfminer读取本地pdf内容（支持中文）并去掉多余换行符 | Lollipop&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="写在前面（这段是我自言自语，用来记录工作生活的废话，可以不用看）最近实验室的项目中需要实现一个定时功能，需要将数据库中每一周的数据做一个统计，生成周报在网站上展示，并提供每周数据的下载，考虑到数据量比较大，若即时统计以及生成下载文件，会严重拖慢网页的访问速度和下载速度。因此，需要提前统计好周报数据以及提取每周数据并生成文件，由于数据每周都会更新，若每周人为地去操作这些将会是一件很繁琐的事情（毕竟我">
+  <meta name="description" content="写在前面看paper英语不好是硬伤，比如我，每次都大段大段把pdf里的内容占到google翻译里，但是pdf直接复制出来的内容每一行会多一个换行，似的翻译出来的内容不连贯，影响翻译的质量，每次都手动删太麻烦了，就抽空写了这个小程序，来帮我自动读取本地的pdf内容，并去掉多余的换行符，保存为txt文本。
+pdfminerpython2.4及以上（python3不支持）有一个可以从PDF文档中提取信息">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Cron配置定时任务">
-<meta property="og:url" content="https://ruiruillp.github.io/2017/03/06/crontab/index.html">
+<meta property="og:title" content="【论文翻译小助手】python2使用pdfminer读取本地pdf内容（支持中文）并去掉多余换行符">
+<meta property="og:url" content="https://ruiruillp.github.io/2017/05/07/PDFreader/index.html">
 <meta property="og:site_name" content="Lollipop's Blog">
-<meta property="og:description" content="写在前面（这段是我自言自语，用来记录工作生活的废话，可以不用看）最近实验室的项目中需要实现一个定时功能，需要将数据库中每一周的数据做一个统计，生成周报在网站上展示，并提供每周数据的下载，考虑到数据量比较大，若即时统计以及生成下载文件，会严重拖慢网页的访问速度和下载速度。因此，需要提前统计好周报数据以及提取每周数据并生成文件，由于数据每周都会更新，若每周人为地去操作这些将会是一件很繁琐的事情（毕竟我">
-<meta property="og:updated_time" content="2017-03-06T14:56:04.149Z">
+<meta property="og:description" content="写在前面看paper英语不好是硬伤，比如我，每次都大段大段把pdf里的内容占到google翻译里，但是pdf直接复制出来的内容每一行会多一个换行，似的翻译出来的内容不连贯，影响翻译的质量，每次都手动删太麻烦了，就抽空写了这个小程序，来帮我自动读取本地的pdf内容，并去掉多余的换行符，保存为txt文本。
+pdfminerpython2.4及以上（python3不支持）有一个可以从PDF文档中提取信息">
+<meta property="og:updated_time" content="2017-05-07T13:50:44.337Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Cron配置定时任务">
-<meta name="twitter:description" content="写在前面（这段是我自言自语，用来记录工作生活的废话，可以不用看）最近实验室的项目中需要实现一个定时功能，需要将数据库中每一周的数据做一个统计，生成周报在网站上展示，并提供每周数据的下载，考虑到数据量比较大，若即时统计以及生成下载文件，会严重拖慢网页的访问速度和下载速度。因此，需要提前统计好周报数据以及提取每周数据并生成文件，由于数据每周都会更新，若每周人为地去操作这些将会是一件很繁琐的事情（毕竟我">
+<meta name="twitter:title" content="【论文翻译小助手】python2使用pdfminer读取本地pdf内容（支持中文）并去掉多余换行符">
+<meta name="twitter:description" content="写在前面看paper英语不好是硬伤，比如我，每次都大段大段把pdf里的内容占到google翻译里，但是pdf直接复制出来的内容每一行会多一个换行，似的翻译出来的内容不连贯，影响翻译的质量，每次都手动删太麻烦了，就抽空写了这个小程序，来帮我自动读取本地的pdf内容，并去掉多余的换行符，保存为txt文本。
+pdfminerpython2.4及以上（python3不支持）有一个可以从PDF文档中提取信息">
   
     <link rel="alternative" href="/atom.xml" title="Lollipop&#39;s Blog" type="application/atom+xml">
   
@@ -164,11 +167,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-crontab" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-PDFreader" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/03/06/crontab/" class="article-date">
-      <time datetime="2017-03-06T12:05:52.000Z" itemprop="datePublished">2017-03-06</time>
+      <a href="/2017/05/07/PDFreader/" class="article-date">
+      <time datetime="2017-05-07T12:43:45.000Z" itemprop="datePublished">2017-05-07</time>
 </a>
     </div>
   
@@ -181,7 +184,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Cron配置定时任务
+      【论文翻译小助手】python2使用pdfminer读取本地pdf内容（支持中文）并去掉多余换行符
     </h1>
   
 
@@ -192,7 +195,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/crontab/">crontab</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pdfminer/">pdfminer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -202,49 +205,59 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>（这段是我自言自语，用来记录工作生活的废话，可以不用看）<br>最近实验室的项目中需要实现一个定时功能，需要将数据库中每一周的数据做一个统计，生成周报在网站上展示，并提供每周数据的下载，考虑到数据量比较大，若即时统计以及生成下载文件，会严重拖慢网页的访问速度和下载速度。因此，需要提前统计好周报数据以及提取每周数据并生成文件，由于数据每周都会更新，若每周人为地去操作这些将会是一件很繁琐的事情（毕竟我记忆力不好），想偷懒，所以就想着找一个Linux可用的定时器，能够周期性地地运行我写好的用来统计数据和生成文件的代码，于是就让我找到了Cron。</p>
-<h2 id="Cron简介"><a href="#Cron简介" class="headerlink" title="Cron简介"></a>Cron简介</h2><p><a href="https://zh.wikipedia.org/wiki/Cron" target="_blank" rel="external">Cron-wiki</a><br><code>crontab</code>命令常见于Unix和类Unix的操作系统之中，<strong>用于设置周期性被执行的命令</strong>。该命令从标准输入设备读取指令，并将其存放于“crontab”文件中，以供之后读取和执行。该词来源于希腊语chronos（χρόνος），原意是时间。<br>通常，<code>crontab</code>储存的指令被守护进程激活，<code>crond</code>常常在后台运行，每一分钟检查是否有预定的作业需要执行。这类作业一般称为cron jobs。<br><a id="more"></a></p>
-<p>##　Crontab文件<br>用户所建立的crontab文件中，每一行都代表一项任务，每行的每个字段代表一项设置，它的格式共分为六个字段，前五段是时间设定段，第六段是要执行的命令段</p>
-<h3 id="语法格式"><a href="#语法格式" class="headerlink" title="语法格式"></a>语法格式</h3><pre><code>minute hour day-of-month month day-of-week command
-</code></pre><p>其中：</p>
-<ul>
-<li>minute： 分钟，范围是0-59</li>
-<li>hour： 小时，范围是0-23</li>
-<li>day-of-month： 日期，范围是1-31</li>
-<li>month： 月份，范围是1-12</li>
-<li>day-of-week： 星期几，范围0-7（星期天可以使0或7）</li>
-<li>command： 要执行的命令，或者需要执行的脚本文件的全路径</li>
-</ul>
-<p>上述字段中，还可以使用一下特殊字符：</p>
-<ul>
-<li>星号(*)：代表所有可能的值，若某个字段值为’*‘，则表示在该字段的每一个可能值下都执行该命令；如month为’*’，则在满足其他字段的制约条件下每个月都执行该命令；</li>
-<li>逗号(,)：用逗号隔开的值指定一个列表的范围，如：”1,2,3”；</li>
-<li>短杠(‘-‘): 用于整数之间，表示一个连续的整数范围，如：”1-3”，表示”1,2,3”;</li>
-<li>斜杠(‘/‘)：指定时间的间隔频率，如：hour字段为”10-22/2”表示10点到22点之间每两小时执行一次;</li>
-<li>星号(*)和斜杠(‘/‘)可一起使用，如：minute字段为”*/10”表示每十分钟执行一次。</li>
-</ul>
-<p>我需要每周执行一次，于是任务项应该是：</p>
-<pre><code>0 0 * * 1 my_command
-</code></pre><p>即：每周的0点0分执行my_command命令</p>
-<h3 id="输出配置"><a href="#输出配置" class="headerlink" title="输出配置"></a>输出配置</h3><p>若是想要查看运行的情况，可将运行的结果输出到文件中，在每一行的任务项后再加上文件路径和输出内容的类型，例如，我会将运行的结果或错误信息都输出到log文件中：</p>
-<pre><code>0 0 * * 1 my_command &gt;/path/of/cron.log 2&gt;&amp;1 &amp;
-</code></pre><p>若不想让其有内容输出，可将文件路径写成<code>/dev/null</code></p>
-<p><strong>注</strong>：’&gt;’表示重定向，bash中0，1，2三个数字分别代表STDIN_FILENO、STDOUT_FILENO、STDERR_FILENO，即标准输入（一般是键盘），标准输出（一般是显示屏，准确的说是用户终端控制台），标准错误（出错信息输出；”2&gt;&amp;1”则表示将标准错误重定向到标准输出中的，输出到前面的文件里，最后的’&amp;’表示让bash在后台运行。</p>
-<h2 id="crontab命令"><a href="#crontab命令" class="headerlink" title="crontab命令"></a>crontab命令</h2><h3 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h3><pre><code>crontab [-u user] [-e | -l | -r]
-</code></pre><h3 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h3><ul>
-<li>-u user： 用来设定某个用户的crontab服务，此参数一般有root用户来运行，若不指定用户，则表示对当前用户的crontab文件进行操作；</li>
-<li>-e： 编辑某个用户的crontab文件内容；</li>
-<li>-|： 显示某个用户的crontab文件内容；</li>
-<li>-r： 从/var/spool/cron目录中删除的crontab文件；</li>
-</ul>
-<h2 id="crond服务"><a href="#crond服务" class="headerlink" title="crond服务"></a>crond服务</h2><p>包括crond服务启动、停止和重启</p>
-<h3 id="系统中可使用service命令"><a href="#系统中可使用service命令" class="headerlink" title="系统中可使用service命令"></a>系统中可使用service命令</h3><pre><code>$ service crond start
-$ service crond stop
-$ service crond restart
-</code></pre><p><strong>注</strong>：<code>crond</code> 也有可能是 <code>cron</code>，如果前者不行，可以试下后者</p>
-<h3 id="无法使用service命令"><a href="#无法使用service命令" class="headerlink" title="无法使用service命令"></a>无法使用service命令</h3><pre><code>/etc/init.d/cron stop  
-/etc/init.d/cron start
-</code></pre><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>1.<a href="http://www.111cn.net/sys/linux/114487.htm" target="_blank" rel="external">linux中crontab命令启动/重启/停止详解</a><br>2.<a href="http://baike.baidu.com/link?url=AVsEqVwb1amcmpI5WwF2UjdcYmWgfftvq6qVwfTzLFDP3DIhIxTauotNZ-geoFJzDOAeFO1ZqklTLpguopERba" target="_blank" rel="external">crontab</a><br>3.<a href="http://blog.sina.com.cn/s/blog_74e1ec5d0100t926.html" target="_blank" rel="external">重启crontab服务</a></p>
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>看paper英语不好是硬伤，比如我，每次都大段大段把pdf里的内容占到google翻译里，但是pdf直接复制出来的内容每一行会多一个换行，似的翻译出来的内容不连贯，影响翻译的质量，每次都手动删太麻烦了，就抽空写了这个小程序，来帮我自动读取本地的pdf内容，并去掉多余的换行符，保存为txt文本。</p>
+<h2 id="pdfminer"><a href="#pdfminer" class="headerlink" title="pdfminer"></a>pdfminer</h2><p>python2.4及以上（python3不支持）有一个可以从PDF文档中提取信息的库——<a href="http://www.unixuser.org/~euske/python/pdfminer/" target="_blank" rel="external">pdfminer</a>，具体的下载和安装就不赘述了，链接中有。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>原谅我最近比较忙，就不多说了，直接贴代码，关键部分有注释：</p>
+<pre><code># -*- coding: utf-8 -*-
+from pdfminer.pdfparser import PDFParser
+from pdfminer.pdfdocument import PDFDocument
+from pdfminer.pdfpage import PDFPage
+from pdfminer.pdfpage import PDFTextExtractionNotAllowed
+from pdfminer.pdfinterp import PDFResourceManager
+from pdfminer.pdfinterp import PDFPageInterpreter
+from pdfminer.layout import *
+from pdfminer.converter import PDFPageAggregator
+import re,os
+
+def Pdf2Txt(Path,file_txt,file_translated):
+    #来创建一个pdf文档分析器
+    parser = PDFParser(Path)
+    #创建一个PDF文档对象存储文档结构
+    document = PDFDocument(parser)
+    # 检查文件是否允许文本提取
+    if not document.is_extractable:
+        raise PDFTextExtractionNotAllowed
+    else:
+        # 创建一个PDF资源管理器对象来存储共赏资源
+        rsrcmgr=PDFResourceManager()
+        # 设定参数进行分析
+        laparams=LAParams()
+        # 创建一个PDF设备对象
+        # device=PDFDevice(rsrcmgr)
+        device=PDFPageAggregator(rsrcmgr,laparams=laparams)
+        # 创建一个PDF解释器对象
+        interpreter=PDFPageInterpreter(rsrcmgr,device)
+        # 处理每一页
+        for page in PDFPage.create_pages(document):
+            interpreter.process_page(page)
+            # 接受该页面的LTPage对象
+            layout=device.get_result()
+            for x in layout:
+                if(isinstance(x,LTTextBoxHorizontal)):
+                    with open(&apos;%s&apos;%(file_txt),&apos;a&apos;) as f:
+                        # 除去多余换行（选用了不常用的字符&apos;~&apos;过渡）
+                        re_result, number = re.subn(&apos;(\n\s)+&apos;, &apos;~&apos;,  x.get_text().encode(&apos;utf-8&apos;))
+                        result = re_result.replace(&apos;\n&apos;,&apos;&apos;).replace(&apos;~&apos;,&apos;\n&apos;) + &apos;\n&apos;
+                        f.write(result)
+
+fileIn = unicode(&apos;{paper_name}.pdf&apos;,&quot;utf-8&quot;)
+Path = open(fileIn, &apos;rb&apos;)
+file_txt = fileIn.replace(&apos;.pdf&apos;,&apos;.txt&apos;)
+file_translated = fileIn.replace(&apos;.pdf&apos;,&apos;_translated.txt&apos;)
+if os.path.exists(file_txt):
+    os.remove(file_txt)
+Pdf2Txt(Path,file_txt,file_translated)
+</code></pre><p>翻译的话，本来想直接在程序中调用google翻译的，正常途径需要收费，查了很多资料，除了翻墙问题，google翻译更新后ticket机制已经不允许简单的爬虫访问了，感兴趣的话可以换成百度翻译，或者可以直接将生成的txt中的内容粘贴到google翻译中，也不算太麻烦。</p>
 
       
     </div>
@@ -253,13 +266,13 @@ $ service crond restart
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/03/06/crontab/">Cron配置定时任务</a></p>
+        <p><span>本文标题:</span><a href="/2017/05/07/PDFreader/">【论文翻译小助手】python2使用pdfminer读取本地pdf内容（支持中文）并去掉多余换行符</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Lollipop 的个人博客">Lollipop</a></p>
-        <p><span>发布时间:</span>2017年03月06日 - 20时05分</p>
-        <p><span>最后更新:</span>2017年03月06日 - 22时56分</p>
+        <p><span>发布时间:</span>2017年05月07日 - 20时43分</p>
+        <p><span>最后更新:</span>2017年05月07日 - 21时50分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/03/06/crontab/" title="Cron配置定时任务">https://ruiruillp.github.io/2017/03/06/crontab/</a>
-            <span class="copy-path" data-clipboard-text="原文: https://ruiruillp.github.io/2017/03/06/crontab/　　作者: Lollipop" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/05/07/PDFreader/" title="【论文翻译小助手】python2使用pdfminer读取本地pdf内容（支持中文）并去掉多余换行符">https://ruiruillp.github.io/2017/05/07/PDFreader/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://ruiruillp.github.io/2017/05/07/PDFreader/　　作者: Lollipop" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -272,18 +285,9 @@ $ service crond restart
 
 <nav id="article-nav">
   
-    <a href="/2017/05/07/PDFreader/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          【论文翻译小助手】python2使用pdfminer读取本地pdf内容（支持中文）并去掉多余换行符
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/03/03/MakeDown/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Markdown快速入门</div>
+    <a href="/2017/03/06/crontab/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Cron配置定时任务</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -294,7 +298,7 @@ $ service crond restart
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#写在前面"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cron简介"><span class="toc-number">2.</span> <span class="toc-text">Cron简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#语法格式"><span class="toc-number">2.1.</span> <span class="toc-text">语法格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输出配置"><span class="toc-number">2.2.</span> <span class="toc-text">输出配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#crontab命令"><span class="toc-number">3.</span> <span class="toc-text">crontab命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令格式"><span class="toc-number">3.1.</span> <span class="toc-text">命令格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数详解"><span class="toc-number">3.2.</span> <span class="toc-text">参数详解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#crond服务"><span class="toc-number">4.</span> <span class="toc-text">crond服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#系统中可使用service命令"><span class="toc-number">4.1.</span> <span class="toc-text">系统中可使用service命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#无法使用service命令"><span class="toc-number">4.2.</span> <span class="toc-text">无法使用service命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#写在前面"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pdfminer"><span class="toc-number">2.</span> <span class="toc-text">pdfminer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-number">3.</span> <span class="toc-text">代码</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -342,7 +346,7 @@ $ service crond restart
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2017/03/06/crontab/" data-title="Cron配置定时任务" data-url="https://ruiruillp.github.io/2017/03/06/crontab/"></div>
+    <div class="ds-thread" data-thread-key="2017/05/07/PDFreader/" data-title="【论文翻译小助手】python2使用pdfminer读取本地pdf内容（支持中文）并去掉多余换行符" data-url="https://ruiruillp.github.io/2017/05/07/PDFreader/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -365,13 +369,11 @@ $ service crond restart
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/05/07/PDFreader/" title="上一篇: 【论文翻译小助手】python2使用pdfminer读取本地pdf内容（支持中文）并去掉多余换行符">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/03/03/MakeDown/" title="下一篇: Markdown快速入门">
+            <a href="/2017/03/06/crontab/" title="下一篇: Cron配置定时任务">
                 <i class="fa fa-angle-right"></i>
             </a>
         
